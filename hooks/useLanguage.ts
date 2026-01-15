@@ -12,6 +12,18 @@ export interface Translations {
     halfway: string;
     finished: string;
   };
+  snake: {
+    title: string;
+    zoneLabel: string;
+    scoreLabel: string;
+    highScoreLabel: string;
+    startLabel: string;
+    replayLabel: string;
+    gameOverTitle: string;
+    lostMessage: string;
+    controlsHint: string;
+    closeLabel: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -25,6 +37,19 @@ const translations: Record<Language, Translations> = {
       halfway: "Moitié chemin !",
       finished: "LIBERTÉ !! 🎉",
     },
+    snake: {
+      title: "Snake de Procrastination",
+      zoneLabel: "Zone de Procrastination",
+      scoreLabel: "Score",
+      highScoreLabel: "Meilleur",
+      startLabel: "Jouer",
+      replayLabel: "Rejouer",
+      gameOverTitle: "PERDU !",
+      lostMessage: "Le temps passe... mais toi tu joues au Snake. Respect.",
+      controlsHint:
+        "Flèches du clavier ou boutons ci-dessous pour bouger le serpent.",
+      closeLabel: "Retour au timer",
+    },
   },
   en: {
     title: "Are We Done Yet?",
@@ -35,6 +60,18 @@ const translations: Record<Language, Translations> = {
       waiting: "Sleep tight... 💤",
       halfway: "Halfway there!",
       finished: "FREEDOM!! 🎉",
+    },
+    snake: {
+      title: "Procrastination Snake",
+      zoneLabel: "Procrastination Zone",
+      scoreLabel: "Score",
+      highScoreLabel: "Best",
+      startLabel: "Play",
+      replayLabel: "Play Again",
+      gameOverTitle: "GAME OVER",
+      lostMessage: "Time is ticking... and you're playing Snake. Respect.",
+      controlsHint: "Use arrow keys or the buttons below to move the snake.",
+      closeLabel: "Back to timer",
     },
   },
 };
