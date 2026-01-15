@@ -39,7 +39,7 @@ export function StatusMessage({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="text-2xl md:text-3xl font-chewy text-center"
+      className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-chewy text-center"
     >
       {getMessage()}
     </motion.div>

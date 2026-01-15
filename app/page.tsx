@@ -57,10 +57,10 @@ function HomeContent() {
   }
 
   return (
-    <main className="relative min-h-screen bg-yellow-50 flex flex-col items-center justify-between p-4 md:p-8">
+    <main className="relative min-h-screen bg-yellow-50 flex flex-col items-center justify-between p-3 sm:p-4 md:p-8">
       <div className="w-full max-w-2xl relative flex-1 flex flex-col justify-center">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-chewy text-gray-900">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-chewy text-gray-900">
             {t.title}
           </h1>
           <div className="flex items-center gap-2 sm:gap-3">
@@ -73,7 +73,7 @@ function HomeContent() {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
+        <div className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 min-w-0">
             <TimeInput
               label={t.startLabel}
@@ -87,19 +87,19 @@ function HomeContent() {
             />
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-              <span className="font-nunito font-semibold text-gray-700 text-sm sm:text-base">
+              <span className="font-nunito font-semibold text-gray-700 text-xs sm:text-sm md:text-base">
                 {t.timeRemaining}
               </span>
-              <span className="text-2xl sm:text-3xl md:text-4xl font-chewy text-gray-900">
+              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-chewy text-gray-900">
                 {timeRemaining}
               </span>
             </div>
 
             <ProgressBar percentage={percentage} />
 
-            <div className="pt-4">
+            <div className="pt-2 sm:pt-4">
               <StatusMessage
                 percentage={percentage}
                 state={state}
@@ -119,9 +119,9 @@ function HomeContent() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className="fixed right-12 bottom-20 sm:right-20 sm:bottom-16 md:right-24 md:bottom-20 z-20 pointer-events-none"
+          className="fixed right-8 bottom-16 sm:right-20 sm:bottom-16 md:right-24 md:bottom-20 z-20 pointer-events-none"
         >
-          <span className="text-lg sm:text-xl md:text-2xl font-chewy text-gray-900">
+          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-chewy text-gray-900">
             {t.boredMessage}
           </span>
         </motion.div>
