@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Chewy, Nunito } from "next/font/google";
 import "./globals.css";
 
+export const runtime = "edge";
+
 const chewy = Chewy({
   weight: "400",
   subsets: ["latin"],
@@ -17,6 +19,10 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Are We Done Yet?",
   description: "Track your course progress with style",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
