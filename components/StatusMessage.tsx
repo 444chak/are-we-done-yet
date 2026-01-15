@@ -5,23 +5,32 @@ import { motion } from "framer-motion";
 interface StatusMessageProps {
   percentage: number;
   state: "waiting" | "running" | "finished";
-  waitingMessage: string;
-  halfwayMessage: string;
+  under25Message: string;
+  under50Message: string;
+  under75Message: string;
+  under100Message: string;
   finishedMessage: string;
 }
 
 export function StatusMessage({
   percentage,
   state,
-  waitingMessage,
-  halfwayMessage,
+  under25Message,
+  under50Message,
+  under75Message,
+  under100Message,
   finishedMessage,
 }: StatusMessageProps) {
   const getMessage = () => {
-    if (state === "waiting") return waitingMessage;
+    if (state === "waiting") return under25Message;
     if (state === "finished") return finishedMessage;
-    if (percentage >= 50) return halfwayMessage;
-    return waitingMessage;
+    
+    // Tranches de pourcentage
+    if (percentage < 25) return under25Message;
+    if (percentage < 50) return under50Message;
+    if (percentage < 75) return under75Message;
+    if (percentage < 100) return under100Message;
+    return finishedMessage;
   };
 
   return (

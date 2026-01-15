@@ -8,8 +8,10 @@ export interface Translations {
   endLabel: string;
   timeRemaining: string;
   messages: {
-    waiting: string;
-    halfway: string;
+    under25: string;
+    under50: string;
+    under75: string;
+    under100: string;
     finished: string;
   };
   snake: {
@@ -33,8 +35,10 @@ const translations: Record<Language, Translations> = {
     endLabel: "Fin",
     timeRemaining: "Temps restant",
     messages: {
-      waiting: "Dors encore... 💤",
-      halfway: "Moitié chemin !",
+      under25: "Dors encore... 💤",
+      under50: "On y va doucement... 🐌",
+      under75: "Moitié chemin ! 💪",
+      under100: "Presque là ! 🚀",
       finished: "LIBERTÉ !! 🎉",
     },
     snake: {
@@ -57,8 +61,10 @@ const translations: Record<Language, Translations> = {
     endLabel: "End",
     timeRemaining: "Time remaining",
     messages: {
-      waiting: "Sleep tight... 💤",
-      halfway: "Halfway there!",
+      under25: "Sleep tight... 💤",
+      under50: "Getting there... 🐌",
+      under75: "Halfway there! 💪",
+      under100: "Almost there! 🚀",
       finished: "FREEDOM!! 🎉",
     },
     snake: {

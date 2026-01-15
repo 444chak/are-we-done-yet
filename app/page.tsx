@@ -69,8 +69,10 @@ export default function Home() {
               <StatusMessage
                 percentage={percentage}
                 state={state}
-                waitingMessage={t.messages.waiting}
-                halfwayMessage={t.messages.halfway}
+                under25Message={t.messages.under25}
+                under50Message={t.messages.under50}
+                under75Message={t.messages.under75}
+                under100Message={t.messages.under100}
                 finishedMessage={t.messages.finished}
               />
             </div>
