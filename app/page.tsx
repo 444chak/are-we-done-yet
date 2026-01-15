@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useCourseTimer } from "@/hooks/useCourseTimer";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useUrlParams } from "@/hooks/useUrlParams";
 import { ProgressBar } from "@/components/ProgressBar";
 import { TimeInput } from "@/components/TimeInput";
 import { StatusMessage } from "@/components/StatusMessage";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { ShareButton } from "@/components/ShareButton";
 import { SnakeGame } from "@/components/SnakeGame";
 
-export default function Home() {
+function HomeContent() {
   const [showSnake, setShowSnake] = useState(false);
+  const { getStartTime, getEndTime, updateUrl, getShareUrl } = useUrlParams();
+
+  // Lire les paramètres depuis l'URL au montage
+  const urlStartTime = getStartTime();
+  const urlEndTime = getEndTime();
 
   const {
     startTime,
@@ -20,9 +27,27 @@ export default function Home() {
     percentage,
     timeRemaining,
     state,
-  } = useCourseTimer();
+  } = useCourseTimer({
+    initialStartTime: urlStartTime,
+    initialEndTime: urlEndTime,
+  });
 
   const { t, toggleLanguage, language, mounted } = useLanguage();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Mettre à jour l'URL quand les horaires changent (mais pas au premier rendu)
+  useEffect(() => {
+    if (mounted && !isInitialized) {
+      setIsInitialized(true);
+      return;
+    }
+    if (mounted && isInitialized && startTime && endTime) {
+      updateUrl(startTime, endTime);
+    }
+  }, [startTime, endTime, updateUrl, mounted, isInitialized]);
+
+  // Générer l'URL de partage (doit être avant le return conditionnel)
+  const shareUrl = getShareUrl(startTime, endTime);
 
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
@@ -36,7 +61,14 @@ export default function Home() {
           <h1 className="text-4xl md:text-5xl font-chewy text-gray-900">
             {t.title}
           </h1>
-          <LanguageToggle language={language} onToggle={toggleLanguage} />
+          <div className="flex items-center gap-3">
+            <ShareButton
+              shareUrl={shareUrl}
+              shareLabel={t.shareLabel}
+              copiedLabel={t.copiedLabel}
+            />
+            <LanguageToggle language={language} onToggle={toggleLanguage} />
+          </div>
         </div>
 
         <div className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 md:p-8 space-y-8">
@@ -106,5 +138,13 @@ export default function Home() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   );
 }

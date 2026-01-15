@@ -24,10 +24,33 @@ export interface UseCourseTimerReturn {
 const DEFAULT_START = "09:10";
 const DEFAULT_END = "12:40";
 
-export function useCourseTimer(): UseCourseTimerReturn {
-  const [startTime, setStartTime] = useState<string>(DEFAULT_START);
-  const [endTime, setEndTime] = useState<string>(DEFAULT_END);
+export interface UseCourseTimerOptions {
+  initialStartTime?: string | null;
+  initialEndTime?: string | null;
+}
+
+export function useCourseTimer(
+  options?: UseCourseTimerOptions
+): UseCourseTimerReturn {
+  const initialStart = options?.initialStartTime || DEFAULT_START;
+  const initialEnd = options?.initialEndTime || DEFAULT_END;
+
+  const [startTime, setStartTime] = useState<string>(initialStart);
+  const [endTime, setEndTime] = useState<string>(initialEnd);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
+
+  // Sync avec les valeurs initiales si elles changent (depuis l'URL)
+  useEffect(() => {
+    if (options?.initialStartTime) {
+      setStartTime(options.initialStartTime);
+    }
+  }, [options?.initialStartTime]);
+
+  useEffect(() => {
+    if (options?.initialEndTime) {
+      setEndTime(options.initialEndTime);
+    }
+  }, [options?.initialEndTime]);
 
   // Update current time every 100ms for smooth animations
   useEffect(() => {
