@@ -10,6 +10,7 @@ import { StatusMessage } from "@/components/StatusMessage";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { ShareButton } from "@/components/ShareButton";
 import { SnakeGame } from "@/components/SnakeGame";
+import { motion } from "framer-motion";
 
 function HomeContent() {
   const [showSnake, setShowSnake] = useState(false);
@@ -111,6 +112,19 @@ function HomeContent() {
           </div>
         </div>
       </div>
+
+      {!showSnake && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="fixed right-20 bottom-20 md:right-24 md:bottom-24 z-20 pointer-events-none"
+        >
+          <span className="text-lg md:text-xl font-chewy text-gray-900">
+            {t.boredMessage}
+          </span>
+        </motion.div>
+      )}
 
       {/* Snake game toggle button (bottom-right) */}
       <button

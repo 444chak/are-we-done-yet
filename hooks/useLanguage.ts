@@ -9,6 +9,7 @@ export interface Translations {
   timeRemaining: string;
   shareLabel: string;
   copiedLabel: string;
+  boredMessage: string;
   messages: {
     under25: string;
     under50: string;
@@ -38,6 +39,7 @@ const translations: Record<Language, Translations> = {
     timeRemaining: "Temps restant",
     shareLabel: "Partager",
     copiedLabel: "Copié !",
+    boredMessage: "Tu t'ennuies ?",
     messages: {
       under25: "Dors encore... 💤",
       under50: "On y va doucement... 🐌",
@@ -66,6 +68,7 @@ const translations: Record<Language, Translations> = {
     timeRemaining: "Time remaining",
     shareLabel: "Share",
     copiedLabel: "Copied!",
+    boredMessage: "Bored?",
     messages: {
       under25: "Sleep tight... 💤",
       under50: "Getting there... 🐌",
