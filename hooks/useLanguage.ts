@@ -7,9 +7,15 @@ export interface Translations {
   startLabel: string;
   endLabel: string;
   timeRemaining: string;
+  shareLabel: string;
+  copiedLabel: string;
+  boredMessage: string;
+  contributeLabel: string;
   messages: {
-    waiting: string;
-    halfway: string;
+    under25: string;
+    under50: string;
+    under75: string;
+    under100: string;
     finished: string;
   };
   snake: {
@@ -32,9 +38,15 @@ const translations: Record<Language, Translations> = {
     startLabel: "Début",
     endLabel: "Fin",
     timeRemaining: "Temps restant",
+    shareLabel: "Partager",
+    copiedLabel: "Copié !",
+    boredMessage: "Tu t'ennuies ?",
+    contributeLabel: "Contribuer",
     messages: {
-      waiting: "Dors encore... 💤",
-      halfway: "Moitié chemin !",
+      under25: "Dors encore... 💤",
+      under50: "On y va doucement... 🐌",
+      under75: "Moitié chemin ! 💪",
+      under100: "Presque là ! 🚀",
       finished: "LIBERTÉ !! 🎉",
     },
     snake: {
@@ -56,9 +68,15 @@ const translations: Record<Language, Translations> = {
     startLabel: "Start",
     endLabel: "End",
     timeRemaining: "Time remaining",
+    shareLabel: "Share",
+    copiedLabel: "Copied!",
+    boredMessage: "Bored?",
+    contributeLabel: "Contribute",
     messages: {
-      waiting: "Sleep tight... 💤",
-      halfway: "Halfway there!",
+      under25: "Sleep tight... 💤",
+      under50: "Getting there... 🐌",
+      under75: "Halfway there! 💪",
+      under100: "Almost there! 🚀",
       finished: "FREEDOM!! 🎉",
     },
     snake: {
