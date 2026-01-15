@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Chewy, Nunito } from "next/font/google";
 import "./globals.css";
 
-export const runtime = "edge";
-
 const chewy = Chewy({
   weight: "400",
   subsets: ["latin"],
