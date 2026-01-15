@@ -1,5 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
-import { format, parse, differenceInMinutes, isBefore, isAfter } from "date-fns";
+import {
+  format,
+  parse,
+  differenceInMinutes,
+  isBefore,
+  isAfter,
+} from "date-fns";
 
 export type TimerState = "waiting" | "running" | "finished";
 
@@ -12,6 +18,7 @@ export interface UseCourseTimerReturn {
   timeRemaining: string;
   state: TimerState;
   currentTime: Date;
+  elapsedSeconds: number;
 }
 
 const DEFAULT_START = "09:10";
@@ -22,11 +29,11 @@ export function useCourseTimer(): UseCourseTimerReturn {
   const [endTime, setEndTime] = useState<string>(DEFAULT_END);
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
-  // Update current time every second
+  // Update current time every 100ms for smooth animations
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -57,39 +64,64 @@ export function useCourseTimer(): UseCourseTimerReturn {
     return "running";
   }, [currentTime, startDateTime, endDateTime]);
 
-  // Calculate percentage
+  // Calculate elapsed seconds with precision
+  const elapsedSeconds = useMemo(() => {
+    if (state === "waiting") return 0;
+    if (state === "finished") {
+      const totalMs = endDateTime.getTime() - startDateTime.getTime();
+      return totalMs / 1000;
+    }
+    const elapsedMs = currentTime.getTime() - startDateTime.getTime();
+    return Math.max(0, elapsedMs / 1000);
+  }, [state, currentTime, startDateTime, endDateTime]);
+
+  // Calculate percentage with precision
   const percentage = useMemo(() => {
     if (state === "waiting") return 0;
     if (state === "finished") return 100;
 
-    const totalDuration = differenceInMinutes(endDateTime, startDateTime);
-    const elapsed = differenceInMinutes(currentTime, startDateTime);
-    return Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    const totalMs = endDateTime.getTime() - startDateTime.getTime();
+    const elapsedMs = currentTime.getTime() - startDateTime.getTime();
+    return Math.min(100, Math.max(0, (elapsedMs / totalMs) * 100));
   }, [state, currentTime, startDateTime, endDateTime]);
 
-  // Calculate time remaining
+  // Calculate time remaining (hours, minutes, seconds with 2 decimals)
   const timeRemaining = useMemo(() => {
     if (state === "waiting") {
-      const minutes = differenceInMinutes(startDateTime, currentTime);
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-      if (hours > 0) {
-        return `${hours}h ${mins}m`;
-      }
-      return `${mins}m`;
+      const diffMs = startDateTime.getTime() - currentTime.getTime();
+      if (diffMs <= 0) return "0s";
+
+      const totalSeconds = diffMs / 1000;
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const parts: string[] = [];
+      if (hours > 0) parts.push(`${hours}h`);
+      if (hours > 0 || minutes > 0) parts.push(`${minutes}m`);
+      parts.push(`${Math.floor(seconds)}s`);
+
+      return parts.join(" ");
     }
 
     if (state === "finished") {
-      return "0m";
+      return "0s";
     }
 
-    const minutes = differenceInMinutes(endDateTime, currentTime);
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    if (hours > 0) {
-      return `${hours}h ${mins}m`;
-    }
-    return `${mins}m`;
+    const diffMs = endDateTime.getTime() - currentTime.getTime();
+    if (diffMs <= 0) return "0s";
+
+    const totalSeconds = diffMs / 1000;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const parts: string[] = [];
+    if (hours > 0) parts.push(`${hours}h`);
+    if (hours > 0 || minutes > 0) parts.push(`${minutes}m`);
+    parts.push(`${Math.floor(seconds)}s`);
+
+    return parts.join(" ");
   }, [state, currentTime, startDateTime, endDateTime]);
 
   return {
@@ -101,5 +133,6 @@ export function useCourseTimer(): UseCourseTimerReturn {
     timeRemaining,
     state,
     currentTime,
+    elapsedSeconds,
   };
 }

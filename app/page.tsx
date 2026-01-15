@@ -42,7 +42,11 @@ export default function Home() {
               value={startTime}
               onChange={setStartTime}
             />
-            <TimeInput label={t.endLabel} value={endTime} onChange={setEndTime} />
+            <TimeInput
+              label={t.endLabel}
+              value={endTime}
+              onChange={setEndTime}
+            />
           </div>
 
           <div className="space-y-4">
