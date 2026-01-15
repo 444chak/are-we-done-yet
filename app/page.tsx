@@ -74,7 +74,7 @@ function HomeContent() {
         </div>
 
         <div className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 min-w-0">
             <TimeInput
               label={t.startLabel}
               value={startTime}
