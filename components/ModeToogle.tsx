@@ -2,12 +2,15 @@
 
 import { Moon, Sun } from "lucide-react";
 
+import { Translations } from "@/hooks/useLanguage";
+
 interface ModeToogleProps {
   mode: "light" | "dark";
   onToggle: () => void;
+  t: Translations;
 }
 
-export function ModeToogle({ mode, onToggle }: ModeToogleProps) {
+export function ModeToogle({ mode, onToggle, t }: ModeToogleProps) {
   return (
     <button
       onClick={onToggle}
@@ -19,7 +22,7 @@ export function ModeToogle({ mode, onToggle }: ModeToogleProps) {
       ) : (
         <Moon className="w-4 h-4 text-gray-900 dark:text-gray-100" />
       )}
-      <span>{mode.toUpperCase()}</span>
+      <span>{t.mode[mode]}</span>
     </button>
   );
 }

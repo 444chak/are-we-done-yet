@@ -74,7 +74,7 @@ function HomeContent() {
               copiedLabel={t.copiedLabel}
             />
             <LanguageToggle language={language} onToggle={toggleLanguage} />
-            <ModeToogle mode={mode} onToggle={toogleMode} />
+            <ModeToogle mode={mode} onToggle={toogleMode} t={t} />
           </div>
         </div>
 
