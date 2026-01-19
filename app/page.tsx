@@ -12,6 +12,8 @@ import { ShareButton } from "@/components/ShareButton";
 import { Footer } from "@/components/Footer";
 import { SnakeGame } from "@/components/SnakeGame";
 import { motion } from "framer-motion";
+import { ModeToogle } from "@/components/ModeToogle";
+import { useMode } from "@/hooks/useMode";
 
 function HomeContent() {
   const [showSnake, setShowSnake] = useState(false);
@@ -33,6 +35,8 @@ function HomeContent() {
     initialStartTime: urlStartTime,
     initialEndTime: urlEndTime,
   });
+
+  const { toogleMode, mode } = useMode();
 
   const { t, toggleLanguage, language, mounted } = useLanguage();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -70,6 +74,7 @@ function HomeContent() {
               copiedLabel={t.copiedLabel}
             />
             <LanguageToggle language={language} onToggle={toggleLanguage} />
+            <ModeToogle mode={mode} onToggle={toogleMode} />
           </div>
         </div>
 
