@@ -11,7 +11,7 @@ export function ProgressBar({ percentage }: ProgressBarProps) {
   const displayPercentage = clamped.toFixed(2);
 
   return (
-    <div className="relative w-full h-14 md:h-16 bg-white rounded-3xl border-3 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="relative w-full h-14 md:h-16 bg-white dark:bg-gray-700 rounded-3xl border-3 border-black dark:border-gray-600 overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)]">
       {/* Animated gradient bar */}
       <motion.div
         className="absolute left-0 top-0 h-full bg-gradient-to-r from-purple-500 via-pink-500 to-lime-400 rounded-3xl"
@@ -54,7 +54,7 @@ export function ProgressBar({ percentage }: ProgressBarProps) {
         >
           <motion.span
             key={displayPercentage}
-            className="font-chewy text-3xl md:text-4xl text-black drop-shadow-[2px_2px_0_rgba(255,255,255,0.8)]"
+            className="font-chewy text-3xl md:text-4xl text-black dark:text-gray-100 drop-shadow-[2px_2px_0_rgba(255,255,255,0.8)] dark:drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)]"
             initial={{ y: -5, opacity: 0.5 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{
