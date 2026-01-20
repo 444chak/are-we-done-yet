@@ -74,17 +74,17 @@ export function ShareButton({
     <button
       type="button"
       onClick={handleShare}
-      className="flex items-center gap-2 px-4 py-2 bg-white rounded-3xl border-3 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-nunito font-semibold text-sm cursor-pointer"
+      className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-3xl border-3 border-black dark:border-gray-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.08)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.16)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-nunito font-semibold text-sm cursor-pointer text-gray-900 dark:text-gray-100"
       aria-label={shareLabel}
     >
       {copied ? (
         <>
-          <Check className="w-4 h-4" />
+          <Check className="w-4 h-4 text-gray-900 dark:text-gray-100" />
           <span>{copiedLabel}</span>
         </>
       ) : (
         <>
-          <Share2 className="w-4 h-4" />
+          <Share2 className="w-4 h-4 text-gray-900 dark:text-gray-100" />
           <span>{shareLabel}</span>
         </>
       )}

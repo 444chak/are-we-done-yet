@@ -12,6 +12,8 @@ import { ShareButton } from "@/components/ShareButton";
 import { Footer } from "@/components/Footer";
 import { SnakeGame } from "@/components/SnakeGame";
 import { motion } from "framer-motion";
+import { ModeToogle } from "@/components/ModeToogle";
+import { useMode } from "@/hooks/useMode";
 
 function HomeContent() {
   const [showSnake, setShowSnake] = useState(false);
@@ -33,6 +35,8 @@ function HomeContent() {
     initialStartTime: urlStartTime,
     initialEndTime: urlEndTime,
   });
+
+  const { toogleMode, mode } = useMode();
 
   const { t, toggleLanguage, language, mounted } = useLanguage();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -57,10 +61,10 @@ function HomeContent() {
   }
 
   return (
-    <main className="relative min-h-screen bg-yellow-50 flex flex-col items-center justify-between p-3 sm:p-4 md:p-8">
+    <main className="relative min-h-screen bg-yellow-50 dark:bg-gray-900 flex flex-col items-center justify-between p-3 sm:p-4 md:p-8">
       <div className="w-full max-w-2xl relative flex-1 flex flex-col justify-center">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 md:mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-chewy text-gray-900">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-chewy text-gray-900 dark:text-gray-100">
             {t.title}
           </h1>
           <div className="flex items-center gap-2 sm:gap-3">
@@ -70,10 +74,11 @@ function HomeContent() {
               copiedLabel={t.copiedLabel}
             />
             <LanguageToggle language={language} onToggle={toggleLanguage} />
+            <ModeToogle mode={mode} onToggle={toogleMode} t={t} />
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl border-3 border-black dark:border-gray-600 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 min-w-0">
             <TimeInput
               label={t.startLabel}
@@ -89,10 +94,10 @@ function HomeContent() {
 
           <div className="space-y-3 sm:space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-              <span className="font-nunito font-semibold text-gray-700 text-xs sm:text-sm md:text-base">
+              <span className="font-nunito font-semibold text-gray-700 dark:text-gray-300 text-xs sm:text-sm md:text-base">
                 {t.timeRemaining}
               </span>
-              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-chewy text-gray-900">
+              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-chewy text-gray-900 dark:text-gray-100">
                 {timeRemaining}
               </span>
             </div>
@@ -121,7 +126,7 @@ function HomeContent() {
           transition={{ delay: 1, duration: 0.5 }}
           className="fixed right-8 bottom-16 sm:right-20 sm:bottom-16 md:right-24 md:bottom-20 z-20 pointer-events-none"
         >
-          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-chewy text-gray-900">
+          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-chewy text-gray-900 dark:text-gray-100">
             {t.boredMessage}
           </span>
         </motion.div>
@@ -131,7 +136,7 @@ function HomeContent() {
       <button
         type="button"
         onClick={() => setShowSnake(true)}
-        className="fixed right-3 bottom-3 sm:right-4 sm:bottom-4 md:right-6 md:bottom-6 z-30 inline-flex items-center justify-center rounded-full border-3 border-black bg-white px-3 py-2 sm:px-4 sm:py-3 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-transform"
+        className="fixed right-3 bottom-3 sm:right-4 sm:bottom-4 md:right-6 md:bottom-6 z-30 inline-flex items-center justify-center rounded-full border-3 border-black dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 sm:px-4 sm:py-3 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[5px_5px_0px_0px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 hover:translate-x-0.5 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[7px_7px_0px_0px_rgba(255,255,255,0.2)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:active:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.1)] transition-transform"
         aria-label={t.snake.title}
       >
         <span className="text-lg sm:text-xl md:text-2xl">🎮</span>
@@ -149,7 +154,7 @@ function HomeContent() {
                 {t.snake.zoneLabel}
               </span>
             </div>
-            <div className="bg-white rounded-3xl border-3 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] p-4 md:p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-3xl border-3 border-black dark:border-gray-600 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] p-4 md:p-6">
               <SnakeGame t={t} onClose={() => setShowSnake(false)} />
             </div>
           </div>

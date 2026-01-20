@@ -30,6 +30,10 @@ export interface Translations {
     controlsHint: string;
     closeLabel: string;
   };
+  mode: {
+    light: string;
+    dark: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -62,6 +66,10 @@ const translations: Record<Language, Translations> = {
         "Flèches du clavier ou boutons ci-dessous pour bouger le serpent.",
       closeLabel: "Retour au timer",
     },
+    mode: {
+      light: "Clair",
+      dark: "Sombre",
+    },
   },
   en: {
     title: "Are We Done Yet?",
@@ -90,6 +98,10 @@ const translations: Record<Language, Translations> = {
       lostMessage: "Time is ticking... and you're playing Snake. Respect.",
       controlsHint: "Use arrow keys or the buttons below to move the snake.",
       closeLabel: "Back to timer",
+    },
+    mode: {
+      light: "Light",
+      dark: "Dark",
     },
   },
 };

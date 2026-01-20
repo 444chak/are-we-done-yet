@@ -24,7 +24,7 @@ export function StatusMessage({
   const getMessage = () => {
     if (state === "waiting") return under25Message;
     if (state === "finished") return finishedMessage;
-    
+
     // Tranches de pourcentage
     if (percentage < 25) return under25Message;
     if (percentage < 50) return under50Message;
@@ -39,7 +39,7 @@ export function StatusMessage({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-chewy text-center"
+      className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-chewy text-center text-gray-900 dark:text-gray-100"
     >
       {getMessage()}
     </motion.div>
