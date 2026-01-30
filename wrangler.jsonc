@@ -1,0 +1,7 @@
+{
+  // Configuration for Cloudflare Pages
+  // This file is optional - OpenNext will create it automatically if it doesn't exist
+  "name": "are-we-done-yet",
+  "compatibility_date": "2026-01-15",
+  "pages_build_output_dir": ".open-next"
+}
