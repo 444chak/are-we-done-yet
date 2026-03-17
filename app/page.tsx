@@ -13,7 +13,7 @@ import { Footer } from "@/components/Footer";
 import { SnakeGame } from "@/components/SnakeGame";
 import { motion } from "framer-motion";
 import { ModeToogle } from "@/components/ModeToogle";
-import { useMode } from "@/hooks/useMode";
+import { Mode, useMode } from "@/hooks/useMode";
 
 function HomeContent() {
   const [showSnake, setShowSnake] = useState(false);
@@ -36,7 +36,17 @@ function HomeContent() {
     initialEndTime: urlEndTime,
   });
 
+  const [defaultMode, setDefaultMode] = useState<Mode>("light");
+
+  useEffect(() => {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDefaultMode(isDark ? "dark" : "light");
+  }, []);
+
   const { toogleMode, mode } = useMode();
+  if (mode !== defaultMode) {
+    toogleMode();
+  }
 
   const { t, toggleLanguage, language, mounted } = useLanguage();
   const [isInitialized, setIsInitialized] = useState(false);
